@@ -51,6 +51,11 @@
     <title>Hotels</title>
 </head>
 <body>
-    
+    <?php foreach ($hotels as $hotel) {?>
+       <?php foreach($hotel as $key =>$val ) {?>
+   <?php echo " <p>{$key} :  {$val} </p>"?>
+ 
+   <?php } ?>
+   <?php } ?>
 </body>
 </html>
