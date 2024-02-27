@@ -51,11 +51,39 @@
     <title>Hotels</title>
 </head>
 <body>
+<!-- 
     <?php foreach ($hotels as $hotel) {?>
        <?php foreach($hotel as $key =>$val ) {?>
    <?php echo " <p>{$key} :  {$val} </p>"?>
+
  
    <?php } ?>
-   <?php } ?>
+   <?php } ?> -->
+   <table class="table w-75 ">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Parking</th>
+      <th scope="col">Rate</th>
+      <th scope="col">Distance to the center</th>
+    </tr>
+  </thead>
+
+  
+
+<tbody>
+<?php foreach ($hotels as $hotel) : ?>
+    <tr>
+    <td><?= $hotel['name']?></td>
+    
+    <td><?= $hotel['description'] ?></td>
+    <td><?= $hotel['parking'] == 1 ? "yes" : "no"?></td>
+    <td><?= $hotel['vote'] ?></td>
+    <td><?= $hotel['distance_to_center'] ?></td>
+    <?php endforeach ?>
+</tbody>
+   </table>
+ 
 </body>
 </html>
