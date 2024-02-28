@@ -39,7 +39,17 @@
         ],
 
     ];
-
+   $filterRes = [];
+   $parking = $_POST["parking"];
+   if(isset($parking)){
+      foreach($hotels as $item){
+        if($parking == $item['parking'] ){
+            array_push($filterRes,$item);
+        }
+       
+      }
+  
+   }
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +60,7 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css' integrity='sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==' crossorigin='anonymous'/>
     <title>Hotels</title>
 </head>
-<body>
+<body class="m-5">
 <!-- 
     <?php foreach ($hotels as $hotel) {?>
        <?php foreach($hotel as $key =>$val ) {?>
@@ -59,6 +69,23 @@
  
    <?php } ?>
    <?php } ?> -->
+   <h3>Filter</h3>
+   <form action="index.php" method="post">
+
+   <div class="form-check">
+  <input class="form-check-input" type="radio" name="parking" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1" value="true">
+   Hotel with car park
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="parking" id="flexRadioDefault2" value="0">
+  <label class="form-check-label" for="flexRadioDefault2">
+    Hotel without car park
+  </label>
+</div>
+<button class="btn btn-primary my-3" type="submit">Submit</button>
+   </form>
    <table class="table w-75 ">
   <thead>
     <tr>
@@ -73,7 +100,7 @@
   
 
 <tbody>
-<?php foreach ($hotels as $hotel) : ?>
+<?php foreach (count($filterRes) === 0 ? $hotels : $filterRes as $hotel) : ?>
     <tr>
     <td><?= $hotel['name']?></td>
     
@@ -84,6 +111,6 @@
     <?php endforeach ?>
 </tbody>
    </table>
- 
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js' integrity='sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==' crossorigin='anonymous'></script>
 </body>
 </html>
