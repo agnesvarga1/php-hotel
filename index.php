@@ -40,16 +40,29 @@
 
     ];
    $filterRes = [];
-   $parking = $_POST["parking"];
-   if(isset($parking)){
+   $parking = $_POST["parking"] ?? null;
+   $stars = $_POST["vote"] ?? null;
+   if($parking === null && $stars == null){
+    echo "nothing set yet"; 
+    
+   }
+
+
+   if(isset($parking) && isset($stars) ){
       foreach($hotels as $item){
-        if($parking == $item['parking'] ){
+        if($parking == $item['parking'] && $stars <= $item["vote"]){
             array_push($filterRes,$item);
-        }
+        } 
        
       }
-  
-   }
+   }elseif (isset($parking)  || isset($stars)  ){
+    foreach($hotels as $item){
+        if($parking == $item['parking'] || $stars <= $item["vote"]){
+            array_push($filterRes,$item);
+        } 
+       
+      }
+   } 
 ?>
 
 <!DOCTYPE html>
@@ -71,8 +84,8 @@
    <?php } ?> -->
    <h3>Filter</h3>
    <form action="index.php" method="post">
-
-   <div class="form-check">
+    <div>
+    <div class="form-check">
   <input class="form-check-input" type="radio" name="parking" id="flexRadioDefault1">
   <label class="form-check-label" for="flexRadioDefault1" value="true">
    Hotel with car park
@@ -84,6 +97,13 @@
     Hotel without car park
   </label>
 </div>
+    </div>
+    <div>
+    <label for="vote">Select stars</label>
+    <input id="vote" name="vote" type="number" min="0" max="5">
+    </div>
+
+
 <button class="btn btn-primary my-3" type="submit">Submit</button>
    </form>
    <table class="table w-75 ">
